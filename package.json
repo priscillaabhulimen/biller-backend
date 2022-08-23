@@ -1,0 +1,5 @@
+{
+  "devDependencies": {
+    "@serverless/enterprise-plugin": "^4.6.0"
+  }
+}
