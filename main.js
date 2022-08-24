@@ -3,10 +3,13 @@ const transaction = require('functions/transaction');
 const api = {};
 
 api.handler = async event => {
-  console.log(event);
+  let response = {};
+  
   if(event.path.includes('transaction')){
-    transaction.handler(event);
+    response = transaction.handler(event);
   }
+
+  return response;
 }
 
 module.exports = api;
