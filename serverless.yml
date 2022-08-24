@@ -9,6 +9,12 @@ provider:
   region: ${opt:region, "eu-west-2"}
   profile: ${opt:profile, "priscilla"}
   stage: ${opt:stage, "dev"}
+  iam:
+    role:
+      statements:
+        - Effect: Allow
+          Action:
+            - dynamodb:PutItem
 
 plugins:
   - '@serverless/enterprise-plugin'
@@ -16,6 +22,11 @@ plugins:
 functions:
   main:
     handler: main.handler
+    events:
+      - http:
+          path: transaction
+          method: POST
+          cors: true
     environment:
       TRANSACTION_TABLE: ${self:custom.DynamoDBTransactionTable}
 
