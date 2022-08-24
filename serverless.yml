@@ -6,13 +6,32 @@ frameworkVersion: '3'
 provider:
   name: aws
   runtime: nodejs16.x
-  region: ${opt:region, "eu-west-2"},
+  region: ${opt:region, "eu-west-2"}
   profile: ${opt:profile, "priscilla"}
   stage: ${opt:stage, "dev"}
 
-functions:
-  main:
-    handler: api.handler
-
 plugins:
   - '@serverless/enterprise-plugin'
+
+functions:
+  main:
+    handler: main.handler
+    environment:
+      TRANSACTION_TABLE: ${self:custom.DynamoDBTransactionTable}
+
+custom:
+  DynamoDBTransactionTable: ${self:service}-transaction-table-${self:provider.stage}
+
+resources:
+  Resources:
+    myTransactionTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        AttributeDefinitions:
+          - AttributeName: transaction_id
+            AttributeType: S
+        KeySchema: 
+          - AttributeName: transaction_id
+            KeyType: HASH
+        BillingMode: PAY_PER_REQUEST
+        TableName: ${self:custom.DynamoDBTransactionTable}
