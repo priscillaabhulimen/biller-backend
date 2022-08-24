@@ -49,8 +49,10 @@ transaction.handleCreateTransaction = item => {
             });
         }
         else{
+            let date = new Date().toISOString();
             let data = {
                 transaction_id : uuidv4(10),
+                date: date,
                 ...item
             }
             item.transaction_id = uuidv4(10);
