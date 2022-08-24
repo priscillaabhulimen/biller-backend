@@ -11,8 +11,8 @@ provider:
   stage: ${opt:stage, "dev"}
 
 functions:
-  hello:
-    handler: handler.hello
+  main:
+    handler: api.handler
 
 plugins:
   - '@serverless/enterprise-plugin'
