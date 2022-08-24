@@ -1,4 +1,4 @@
-transaction = require('functions/transaction');
+const transaction = require('functions/transaction');
 
 const api = {};
 
