@@ -1,6 +1,7 @@
 {
   "devDependencies": {
-    "@serverless/enterprise-plugin": "^4.6.0"
+    "@serverless/enterprise-plugin": "^4.6.0",
+    "vtpassnodejs": "^1.0.9"
   },
   "dependencies": {
     "uuid": "^8.3.2"
