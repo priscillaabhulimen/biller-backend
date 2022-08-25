@@ -40,6 +40,14 @@ transaction.handleCreateTransaction = item => {
                 data: {} 
             });
         }
+        else if(isNaN(item.amount)){
+            reject({
+                statusCode: 400,
+                status: false,
+                message: "Invalid amount, please enter a valid amount",
+                data: {} 
+            });
+        }
         else if(item.recipient == null){
             reject({
                 statusCode: 400,
@@ -55,7 +63,7 @@ transaction.handleCreateTransaction = item => {
                 date: date,
                 ...item
             }
-            item.transaction_id = uuidv4(10);
+            
             let documentClient = new AWS.DynamoDB.DocumentClient();
 
             let params = {
