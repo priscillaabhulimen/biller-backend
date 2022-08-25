@@ -69,6 +69,7 @@ transaction.handleCreateTransaction = item => {
             let data = {
                 transaction_id : uuidv4(10),
                 date: date,
+                status: 'processing',
                 ...item
             }
             
